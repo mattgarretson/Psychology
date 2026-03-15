@@ -301,7 +301,6 @@ public static class PsycheHelper
     }
     if (TryRemoveTraitDef(pawn, TraitDefOf.Asexual))
     {
-      Log.Warning("CorrectTraitsForPawnKinseyEnabled, Removed Asexual trait from pawn = " + pawn.Label);
       if (!PsychologyEnabled(pawn))
       {
         return;
@@ -310,7 +309,6 @@ public static class PsycheHelper
     }
     if (TryRemoveTraitDef(pawn, TraitDefOf.Bisexual))
     {
-      Log.Warning("CorrectTraitsForPawnKinseyEnabled, Removed Bisexual trait from pawn = " + pawn.Label);
       if (!PsychologyEnabled(pawn))
       {
         return;
@@ -319,7 +317,6 @@ public static class PsycheHelper
     }
     if (TryRemoveTraitDef(pawn, TraitDefOf.Gay))
     {
-      Log.Warning("CorrectTraitsForPawnKinseyEnabled, Removed Gay trait from pawn = " + pawn.Label);
       if (!PsychologyEnabled(pawn))
       {
         return;
@@ -373,7 +370,7 @@ public static class PsycheHelper
 
   public static bool TryGainTraitDef(Pawn pawn, TraitDef traitDef)
   {
-    if (HasTraitDef(pawn, traitDef) != true)
+    if (HasTraitDef(pawn, traitDef))
     {
       return false;
     }
