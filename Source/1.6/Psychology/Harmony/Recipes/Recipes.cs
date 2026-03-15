@@ -1,50 +1,53 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
 using RimWorld;
-using HarmonyLib;
 
 namespace Psychology.Harmony
 {
-    [HarmonyPatch(typeof(HealthCardUtility), nameof(HealthCardUtility.DrawPawnHealthCard))]
-    public static class HealthCardUtility_DrawPawnHealthCardPatch
+    [StaticConstructorOnStartup]
+    public static class PsychologyDefInjector
     {
-        [HarmonyPrefix]
-        public static void AddPsychologyRecipes(ref Pawn pawn)
+        static PsychologyDefInjector()
         {
-            List<RecipeDef> recipes = pawn.def.AllRecipes;
-            if (!recipes.Contains(RecipeDefOfPsychology.TreatChemicalInterest))
+            RecipeDef[] recipesToAdd = new RecipeDef[]
             {
-                recipes.Add(RecipeDefOfPsychology.TreatChemicalInterest);
-            }
-            if (!recipes.Contains(RecipeDefOfPsychology.TreatChemicalFascination))
-            {
-                recipes.Add(RecipeDefOfPsychology.TreatChemicalFascination);
-            }
-            if (!recipes.Contains(RecipeDefOfPsychology.TreatDepression))
-            {
-                recipes.Add(RecipeDefOfPsychology.TreatDepression);
-            }
-            if (!recipes.Contains(RecipeDefOfPsychology.TreatInsomnia))
-            {
-                recipes.Add(RecipeDefOfPsychology.TreatInsomnia);
-            }
-            if (!recipes.Contains(RecipeDefOfPsychology.CureAnxiety))
-            {
-                recipes.Add(RecipeDefOfPsychology.CureAnxiety);
-            }
-            if (!recipes.Contains(RecipeDefOfPsychology.TreatPyromania))
-            {
-                recipes.Add(RecipeDefOfPsychology.TreatPyromania);
-            }
+                RecipeDefOfPsychology.TreatChemicalInterest,
+                RecipeDefOfPsychology.TreatChemicalFascination,
+                RecipeDefOfPsychology.TreatDepression,
+                RecipeDefOfPsychology.TreatInsomnia,
+                RecipeDefOfPsychology.CureAnxiety,
+                RecipeDefOfPsychology.TreatPyromania,
+            };
 
-            pawn.def.recipes = recipes;
+            CompProperties_PartnerList partnerListProps = new CompProperties_PartnerList();
 
+            foreach (ThingDef def in DefDatabase<ThingDef>.AllDefsListForReading)
+            {
+                if (def.race == null || !def.race.Humanlike)
+                    continue;
+
+                // Inject Psychology treatment recipes
+                List<RecipeDef> recipes = def.AllRecipes;
+                foreach (RecipeDef recipe in recipesToAdd)
+                {
+                    if (recipe != null && !recipes.Contains(recipe))
+                    {
+                        def.recipes ??= new List<RecipeDef>();
+                        def.recipes.Add(recipe);
+                    }
+                }
+
+                // Inject Comp_PartnerList for hookup/date partner tracking
+                def.comps ??= new List<CompProperties>();
+                if (!def.comps.Any(c => c is CompProperties_PartnerList))
+                {
+                    def.comps.Add(partnerListProps);
+                }
+            }
         }
-
     }
-
 }
