@@ -32,7 +32,8 @@ namespace Psychology
             //    this.Duration -= (plannedStart - 18) * GenDate.TicksPerHour;
             //}
             IEnumerable<Pawn> colonists = from p in this.SingleMap.mapPawns.FreeColonistsSpawned
-                                          where PsycheHelper.PsychologyEnabled(p) && p.HomeFaction == Faction.OfPlayer // 1.3
+                                          where PsycheHelper.PsychologyEnabled(p) && p.HomeFaction == Faction.OfPlayer
+                                          && !p.IsSlaveOfColony && !p.IsPrisonerOfColony
                                           select p;
 
             int numColonists = colonists.Count();
@@ -93,6 +94,7 @@ namespace Psychology
                 Log.Error("[Psychology] Tried to start election but could not find anyone to run.");
                 return;
             }
+            candidates.RemoveDuplicates();
             foreach (Candidate candidate in candidates)
             {
                 StringBuilder issuesString = new StringBuilder();
@@ -102,7 +104,6 @@ namespace Psychology
                 }
                 Find.LetterStack.ReceiveLetter("LetterLabelElectionCandidate".Translate(candidate.pawn), "LetterElectionCandidate".Translate(candidate.pawn, Find.WorldObjects.ObjectsAt(candidate.pawn.Tile).OfType<Settlement>().First().Label, issuesString.ToString()), LetterDefOf.NeutralEvent, candidate.pawn, null);
             }
-            candidates.RemoveDuplicates();
         }
 
         public List<PersonalityNodeDef> GenerateIssues(Pawn candidate)
@@ -135,13 +136,7 @@ namespace Psychology
         public override void GameConditionTick()
         {
             base.GameConditionTick();
-            foreach (Candidate candidate in candidates)
-            {
-                if (candidate.pawn.Dead)
-                {
-                    candidates.Remove(candidate);
-                }
-            }
+            candidates.RemoveAll(c => c.pawn.Dead);
             if (candidates.Count == 0)
             {
                 End();
