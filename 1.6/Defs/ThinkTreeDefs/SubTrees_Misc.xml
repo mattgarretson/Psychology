@@ -58,7 +58,7 @@
 					<subNodes>
 						<li Class="ThinkNode_Priority">
 							<subNodes>
-								<li Class="JobGiver_WanderMapEdge">
+								<li Class="JobGiver_WanderColony">
 									<maxDanger>Some</maxDanger>
 								</li>
 							</subNodes>
@@ -129,7 +129,7 @@
 						<li Class="ThinkNode_Priority">
 							<subNodes>
 								<li Class="Psychology.JobGiver_GoHunting" />
-								<li Class="JobGiver_WanderMapEdge">
+								<li Class="JobGiver_WanderColony">
 									<maxDanger>Some</maxDanger>
 								</li>
 							</subNodes>
