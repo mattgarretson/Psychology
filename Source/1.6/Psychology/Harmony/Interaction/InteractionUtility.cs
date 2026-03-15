@@ -15,7 +15,17 @@ public static class InteractionUtility_CanReceive_Patch
     [HarmonyPostfix]
     public static void PsychologyAddonsForCanReceive(ref bool __result, Pawn p)
     {
-        __result = __result && !p.health.hediffSet.HasHediff(HediffDefOfPsychology.HoldingConversation) && (p.Map.lordManager.lords.Find(l => l.LordJob is LordJob_VisitMayor) == null || !p.Map.lordManager.lords.Find(l => l.LordJob is LordJob_VisitMayor).ownedPawns.Contains(p));
+        if (!__result) return;
+        if (p.health.hediffSet.HasHediff(HediffDefOfPsychology.HoldingConversation))
+        {
+            __result = false;
+            return;
+        }
+        var lord = p.Map.lordManager.lords.Find(l => l.LordJob is LordJob_VisitMayor);
+        if (lord != null && lord.ownedPawns.Contains(p))
+        {
+            __result = false;
+        }
     }
 }
 
@@ -25,7 +35,17 @@ public static class InteractionUtility_CanInitiate_Patch
     [HarmonyPostfix]
     public static void PsychologyAddonsForCanInitiate(ref bool __result, Pawn p)
     {
-        __result = __result && !p.health.hediffSet.HasHediff(HediffDefOfPsychology.HoldingConversation) && (p.Map.lordManager.lords.Find(l => l.LordJob is LordJob_VisitMayor) == null || !p.Map.lordManager.lords.Find(l => l.LordJob is LordJob_VisitMayor).ownedPawns.Contains(p));
+        if (!__result) return;
+        if (p.health.hediffSet.HasHediff(HediffDefOfPsychology.HoldingConversation))
+        {
+            __result = false;
+            return;
+        }
+        var lord = p.Map.lordManager.lords.Find(l => l.LordJob is LordJob_VisitMayor);
+        if (lord != null && lord.ownedPawns.Contains(p))
+        {
+            __result = false;
+        }
     }
 }
 
