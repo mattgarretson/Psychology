@@ -78,7 +78,7 @@ namespace Psychology
             if(PsychologySettings.enableDateLetters)
             {
                 int hourDiscrepancy = GenDate.HourOfDay(day, Find.WorldGrid.LongLatOf(initiator.Map.Tile).x) - hour;
-                int accurateTime = day + (Math.Abs(hourDiscrepancy) * GenDate.TicksPerHour);
+                int accurateTime = day - (hourDiscrepancy * GenDate.TicksPerHour);
                 String dateTime = GenDate.QuadrumDateStringAt(accurateTime, Find.WorldGrid.LongLatOf(initiator.Map.Tile).x);
                 Letter dateLetter = LetterMaker.MakeLetter("LetterLabelDatePlanned".Translate(), "LetterDatePlanned".Translate(initiator, recipient, dateTime, hour), LetterDefOf.PositiveEvent);
                 Find.LetterStack.ReceiveLetter(dateLetter);
