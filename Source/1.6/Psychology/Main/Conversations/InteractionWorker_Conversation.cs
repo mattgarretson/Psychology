@@ -68,7 +68,11 @@ public class InteractionWorker_Conversation : InteractionWorker
         lookTargets = null;
         PersonalityNode topic = (from node in PsycheHelper.Comp(initiator).Psyche.PersonalityNodes
                                  where node.HasConvoTopics
-                                 select node).RandomElementByWeight(node => PsycheHelper.Comp(initiator).Psyche.GetConversationTopicWeight(node.def, recipient));
+                                 select node).RandomElementByWeightWithFallback(node => PsycheHelper.Comp(initiator).Psyche.GetConversationTopicWeight(node.def, recipient));
+        if (topic == null)
+        {
+            return;
+        }
         string convoTopic = topic.def.conversationTopics.RandomElement();
         Hediff_Conversation initiatorHediff = (Hediff_Conversation)HediffMaker.MakeHediff(HediffDefOfPsychology.HoldingConversation, initiator);
         initiatorHediff.otherPawn = recipient;
