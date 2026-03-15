@@ -205,24 +205,24 @@ public static class RomanceHelperMethods
     public static void GainBrokeUpWithMe(Pawn pawn, Pawn otherPawn)
     {
         TryGainOpinion(pawn, otherPawn, ThoughtDefOf.BrokeUpWithMe);
+        // BrokeUpWithMeMood is auto-created by vanilla's thoughtToMake on the opinion thought — don't add it again
         pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfPsychology.BrokeUpWithMeCodependent, otherPawn);
-        TryGainMood(pawn, otherPawn, BrokeUpWithMeMoodDef);
         TryGainMood(otherPawn, pawn, ThoughtDefOfPsychology.IBrokeUpWithThemMood);
     }
 
     public static void GainDivorcedMe(Pawn pawn, Pawn otherPawn)
     {
         TryGainOpinion(pawn, otherPawn, ThoughtDefOf.DivorcedMe);
+        // DivorcedMeMood is auto-created by vanilla's thoughtToMake — don't add it again
         pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfPsychology.DivorcedMeCodependent, otherPawn);
-        TryGainMood(pawn, otherPawn, DivorcedMeMoodDef);
         TryGainMood(otherPawn, pawn, ThoughtDefOfPsychology.IDivorcedThemMood);
     }
 
     public static void GainRejectedMyProposal(Pawn pawn, Pawn otherPawn)
     {
         TryGainOpinion(pawn, otherPawn, ThoughtDefOf.RejectedMyProposal);
+        // RejectedMyProposalMood is auto-created by vanilla's thoughtToMake — don't add it again
         //pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfPsychology.RejectedMyProposalCodependent, otherPawn); // BUGGED, triggers on non-codependent pawns
-        TryGainMood(pawn, otherPawn, ThoughtDefOf.RejectedMyProposalMood); // was otherPawn, pawn
         TryGainMood(otherPawn, pawn, ThoughtDefOfPsychology.IRejectedTheirProposalMood);
     }
 
@@ -230,10 +230,8 @@ public static class RomanceHelperMethods
     {
         //TryGainOpinion(pawn, otherPawn, ThoughtDefOf.CheatedOnMe);
         pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOf.CheatedOnMe, otherPawn);
+        // CheatedOnMeMood is auto-created by vanilla's thoughtToMake — don't add it again
         pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfPsychology.CheatedOnMeCodependent, otherPawn);
-        TryGainMood(pawn, otherPawn, CheatedOnMeMoodDef);
-        //ToDo: make ICheatedOnThemMood ?
-        //TryGainMood(pawn, otherPawn, ThoughtDefOfPsychology.ICheatedOnThemMood);
     }
 
     public static void GainIRejectedTheirProposal(Pawn pawn, Pawn otherPawn) // duplicated in GainRejectedMyProposal, commented out for now
