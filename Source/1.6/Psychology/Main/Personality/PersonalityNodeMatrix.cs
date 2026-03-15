@@ -1270,7 +1270,7 @@ public static class PersonalityNodeMatrix
     float[,] result = new float[lhs.GetLength(0), lhs.GetLength(1)];
     for (int i = 0; i < lhs.GetLength(0); i++)
     {
-      for (int j = 0; i < lhs.GetLength(1); j++)
+      for (int j = 0; j < lhs.GetLength(1); j++)
       {
         result[i, j] = (float)lhs[i, j];
       }

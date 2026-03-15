@@ -435,7 +435,7 @@ public static class InteractionWorker_RomanceAttempt_PartnerFactor_Patches
   [HarmonyPrefix]
   public static bool PartnerFactorPrefix(Pawn initiator, Pawn recipient, ref float __result)
   {
-    if (!PsycheHelper.PsychologyEnabled(initiator) || !PsycheHelper.PsychologyEnabled(initiator))
+    if (!PsycheHelper.PsychologyEnabled(initiator) || !PsycheHelper.PsychologyEnabled(recipient))
     {
       __result = 0f;
       return false;
