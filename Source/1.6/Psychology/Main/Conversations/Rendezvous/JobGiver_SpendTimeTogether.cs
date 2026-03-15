@@ -14,7 +14,12 @@ namespace Psychology
         
         protected override Job TryGiveJob(Pawn pawn)
         {
-            LordToil_HangOut toil = pawn.GetLord().CurLordToil as LordToil_HangOut;
+            Lord lord = pawn.GetLord();
+            if (lord == null)
+                return null;
+            LordToil_HangOut toil = lord.CurLordToil as LordToil_HangOut;
+            if (toil == null)
+                return null;
             Pawn friend = (pawn == toil.friends[0] ? toil.friends[1] : toil.friends[0]);
             if (friend == null)
                 return null;
@@ -55,7 +60,7 @@ namespace Psychology
             if (((pawn.Position - friend.Position).LengthHorizontalSquared >= 54 || !GenSight.LineOfSight(pawn.Position, friend.Position, pawn.Map, true)))
             { /* Make sure they are close to each other if they're not actively doing a joy activity. */
               /* If the other pawn is already walking over, just hang around until they get there. */
-                if (friend.CurJob.def != JobDefOf.Goto)
+                if (friend.CurJob == null || friend.CurJob.def != JobDefOf.Goto)
                     return new Job(JobDefOf.Goto, friend);
                 else
                 {
