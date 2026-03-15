@@ -94,7 +94,7 @@ namespace Psychology.Harmony
                     }
                     else
                     {
-                        num2 = Traverse.Create<InteractionWorker_RecruitAttempt>().Field("RecruitChanceFactorCurve_Wildness").GetValue<SimpleCurve>().Evaluate(recipient.RaceProps.wildness);
+                        num2 = Traverse.Create<InteractionWorker_RecruitAttempt>().Field("RecruitChanceFactorCurve_Wildness").GetValue<SimpleCurve>().Evaluate(recipient.GetStatValue(StatDefOf.Wildness));
                     }
                     recruitChance *= num2;
                     if (!recipient.NonHumanlikeOrWildMan())

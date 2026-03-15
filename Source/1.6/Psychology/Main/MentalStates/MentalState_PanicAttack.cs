@@ -40,9 +40,9 @@ public class MentalState_PanicAttack : MentalState
         base.PostEnd();
     }
 
-    public override void MentalStateTick()
+    public override void MentalStateTick(int delta)
     {
-        base.MentalStateTick();
+        base.MentalStateTick(delta);
         if (mentalStateTicker > 0)
         {
             mentalStateTicker--;

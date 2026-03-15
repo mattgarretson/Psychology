@@ -13,8 +13,6 @@ namespace Psychology
                 return ThoughtState.Inactive;
             if (!p.story.traits.HasTrait(TraitDefOfPsychology.Photosensitive))
                 return ThoughtState.Inactive;
-            if (p.Position == null)
-                return ThoughtState.Inactive;
             if (!p.Awake())
                 return ThoughtState.Inactive;
             if (p.Map.glowGrid.PsychGlowAt(p.Position) == PsychGlow.Dark)

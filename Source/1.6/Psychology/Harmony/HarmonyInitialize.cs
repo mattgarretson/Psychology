@@ -67,7 +67,7 @@ public static class HarmonyInitialize
 
     try
     {
-      harmonyInstance.Unpatch(AccessTools.Method(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTick)), HarmonyPatchType.All);
+      harmonyInstance.Unpatch(AccessTools.Method(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTickInterval)), HarmonyPatchType.All);
     }
     catch (Exception ex)
     {

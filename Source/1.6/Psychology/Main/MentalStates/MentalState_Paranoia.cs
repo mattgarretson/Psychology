@@ -16,9 +16,9 @@ public class MentalState_Paranoia : MentalState
         return RandomSocialMode.Off;
     }
 
-    public override void MentalStateTick()
+    public override void MentalStateTick(int delta)
     {
-        base.MentalStateTick();
+        base.MentalStateTick(delta);
         if (pawn.IsHashIntervalTick(1000) && pawn.Map != null)
         {
             if (Rand.Value < 0.75f)

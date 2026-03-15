@@ -15,9 +15,9 @@ public class MentalState_Histrionic : MentalState
         return RandomSocialMode.SuperActive;
     }
 
-    public override void MentalStateTick()
+    public override void MentalStateTick(int delta)
     {
-        base.MentalStateTick();
+        base.MentalStateTick(delta);
         if (this.pawn.IsHashIntervalTick(150))
         {
             pawn.needs.mood.thoughts.memories.RemoveMemoriesOfDef(ThoughtDefOf.RebuffedMyRomanceAttempt);

@@ -32,7 +32,7 @@ namespace Psychology
             LordJob_VisitMayor meeting = this.lord.LordJob as LordJob_VisitMayor;
             for (int i = 0; i < this.lord.ownedPawns.Count; i++)
             {
-                if (this.lord.ownedPawns[i].Position == null || this.spot == null || this.lord.ownedPawns[i].Map == null || !GatheringsUtility.InGatheringArea(this.lord.ownedPawns[i].Position, this.spot, this.lord.ownedPawns[i].Map))
+                if (this.lord.ownedPawns[i].Map == null || !GatheringsUtility.InGatheringArea(this.lord.ownedPawns[i].Position, this.spot, this.lord.ownedPawns[i].Map))
                 {
                     return;
                 }

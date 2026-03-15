@@ -39,7 +39,7 @@ public static class PawnDiedOrDownedThoughtUtility_AppendThoughtsPatch
         }
         if (thoughtsKind == PawnDiedOrDownedThoughtsKind.Died && victim.Spawned)
         {
-            foreach (Pawn pawn2 in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive) {
+            foreach (Pawn pawn2 in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive) {
 
                 if (pawn2.RaceProps.Humanlike)
                 {
@@ -81,7 +81,7 @@ public static class PawnDiedOrDownedThoughtUtility_AppendThoughtsPatch
         }
         if (thoughtsKind == PawnDiedOrDownedThoughtsKind.Banished && victim.IsColonist)
         {
-            foreach (Pawn pawn2 in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive) {
+            foreach (Pawn pawn2 in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive) {
                 if (pawn2.Faction == Faction.OfPlayer && pawn2.needs.mood != null)
                 {
                     if (pawn2.story.traits.HasTrait(TraitDefOfPsychology.BleedingHeart))

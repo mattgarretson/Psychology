@@ -37,9 +37,9 @@ public class MentalState_FireStartingSpreePsychology : MentalState_FireStartingS
     //    }
     //}
 
-    public override void MentalStateTick()
+    public override void MentalStateTick(int delta)
     {
-        base.MentalStateTick();
+        base.MentalStateTick(delta);
         if (hediff == null || this.pawn.IsHashIntervalTick(30) != true)
         {
             return;

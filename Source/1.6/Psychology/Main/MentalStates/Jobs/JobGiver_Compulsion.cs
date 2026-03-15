@@ -61,7 +61,7 @@ namespace Psychology
                 Thing thing = pawn.Map.listerHaulables.ThingsPotentiallyNeedingHauling().RandomElement();
                 if (thing != null && HaulAIUtility.PawnCanAutomaticallyHaulFast(pawn, thing, true) && pawn.CanReserveAndReach(thing, PathEndMode.Touch, Danger.Some))
                 {
-                    return HaulAIUtility.HaulToStorageJob(pawn, thing);
+                    return HaulAIUtility.HaulToStorageJob(pawn, thing, false);
                 }
             }
             return null;

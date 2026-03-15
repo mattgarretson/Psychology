@@ -9,7 +9,7 @@ using System.Reflection.Emit;
 
 namespace Psychology.Harmony;
 
-[HarmonyPatch(typeof(InteractionUtility), "CanReceiveRandomInteraction")]
+[HarmonyPatch(typeof(SocialInteractionUtility), "CanReceiveRandomInteraction")]
 public static class InteractionUtility_CanReceive_Patch
 {
     [HarmonyPostfix]
@@ -19,7 +19,7 @@ public static class InteractionUtility_CanReceive_Patch
     }
 }
 
-[HarmonyPatch(typeof(InteractionUtility), "CanInitiateRandomInteraction", new[] { typeof(Pawn) })]
+[HarmonyPatch(typeof(SocialInteractionUtility), "CanInitiateRandomInteraction", new[] { typeof(Pawn) })]
 public static class InteractionUtility_CanInitiate_Patch
 {
     [HarmonyPostfix]
@@ -29,7 +29,7 @@ public static class InteractionUtility_CanInitiate_Patch
     }
 }
 
-[HarmonyPatch(typeof(InteractionUtility), nameof(InteractionUtility.TryGetRandomVerbForSocialFight))]
+[HarmonyPatch(typeof(SocialInteractionUtility), nameof(SocialInteractionUtility.TryGetRandomVerbForSocialFight))]
 public static class InteractionUtility_SocialFightVerb_Patch
 {
     [HarmonyPostfix]
@@ -54,7 +54,7 @@ public static class InteractionUtility_SocialFightVerb_Patch
         int iter = 0;
         while (iter < 20)
         {
-            InteractionUtility.TryGetRandomVerbForSocialFight(p, out Verb v);
+            SocialInteractionUtility.TryGetRandomVerbForSocialFight(p, out Verb v);
             if (v != null)
             {
                 if (v.verbProps?.meleeDamageDef?.label != "bite")

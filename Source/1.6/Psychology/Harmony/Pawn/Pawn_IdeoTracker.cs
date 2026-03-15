@@ -20,7 +20,7 @@ public static class Pawn_IdeoTracker_CertaintyChangePerDay_Patch
     }
 }
 
-[HarmonyPatch(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTick))]
+[HarmonyPatch(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTickInterval))]
 public static class Pawn_IdeoTracker_IdeoTrackerTick_Patches
 {
     [HarmonyPrefix]
@@ -43,7 +43,7 @@ public static class Pawn_IdeoTracker_IdeoTrackerTick_Patches
     }
 }
 
-//[HarmonyPatch(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTick))]
+//[HarmonyPatch(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTickInterval))]
 //public class Pawn_IdeoTracker_IdeoTrackerTick_Patch
 //{
 //    [HarmonyPrefix]
@@ -56,7 +56,7 @@ public static class Pawn_IdeoTracker_IdeoTrackerTick_Patches
 //    }
 //}
 
-//[HarmonyPatch(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTick))]
+//[HarmonyPatch(typeof(Pawn_IdeoTracker), nameof(Pawn_IdeoTracker.IdeoTrackerTickInterval))]
 //public static class Pawn_IdeoTracker_IdeoTrackerTick_Patches
 //{
 //    [HarmonyPrefix]

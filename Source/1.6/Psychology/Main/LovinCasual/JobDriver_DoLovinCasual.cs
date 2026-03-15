@@ -89,7 +89,7 @@ namespace Psychology
             };
             layDown.tickAction = delegate
             {
-                Actor.GainComfortFromCellIfPossible();
+                Actor.GainComfortFromCellIfPossible(1);
             };
             yield return layDown;
 
@@ -141,7 +141,7 @@ namespace Psychology
                         FleckMaker.ThrowMetaIcon(Actor.Position, Actor.Map, FleckDefOf.Heart);
                     }
                     //Gain joy every tick
-                    JoyUtility.JoyTickCheckEnd(Actor, JoyTickFullJoyAction.None);
+                    JoyUtility.JoyTickCheckEnd(Actor, 1, JoyTickFullJoyAction.None);
                 },
                 defaultCompleteMode = ToilCompleteMode.Delay
             };

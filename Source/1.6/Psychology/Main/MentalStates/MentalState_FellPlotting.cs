@@ -20,9 +20,9 @@ public class MentalState_FellPlotting : MentalState
     }
 
 
-    public override void MentalStateTick()
+    public override void MentalStateTick(int delta)
     {
-        base.MentalStateTick();
+        base.MentalStateTick(delta);
         if (target == null)
         {
             IEnumerable<Pawn> rivals = (from c in pawn.Map.mapPawns.FreeColonistsSpawned

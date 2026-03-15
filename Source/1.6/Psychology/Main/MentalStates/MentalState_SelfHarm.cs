@@ -11,9 +11,9 @@ namespace Psychology;
 
 public class MentalState_SelfHarm : MentalState
 {
-    public override void MentalStateTick()
+    public override void MentalStateTick(int delta)
     {
-        base.MentalStateTick();
+        base.MentalStateTick(delta);
         if (pawn.health == null)
         {
             return;

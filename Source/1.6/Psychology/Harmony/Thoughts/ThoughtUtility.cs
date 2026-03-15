@@ -62,7 +62,7 @@ public static class ThoughtUtility_ExecutedPatch
         {
             def = ThoughtDefOfPsychology.KnowGuestExecutedBleedingHeart;
         }
-        foreach (Pawn current in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonistsAndPrisoners)
+        foreach (Pawn current in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_FreeColonistsAndPrisoners)
         {
             current.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(def, forcedStage), null);
         }
@@ -88,7 +88,7 @@ public static class ThoughtUtility_OrganHarvestedPatch
         {
             thoughtDef = ThoughtDefOfPsychology.KnowGuestOrganHarvestedBleedingHeart;
         }
-        foreach (Pawn current in PawnsFinder.AllMapsCaravansAndTravelingTransportPods_Alive_FreeColonistsAndPrisoners)
+        foreach (Pawn current in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_FreeColonistsAndPrisoners)
         {
             if (current == victim)
             {

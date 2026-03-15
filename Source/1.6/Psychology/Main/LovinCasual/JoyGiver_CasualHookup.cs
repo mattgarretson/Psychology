@@ -45,7 +45,7 @@ namespace Psychology
             }
 
             //Checks on whether pawn should try hookup now
-            if (!InteractionUtility.CanInitiateInteraction(pawn) || !RomanceUtility.WillPawnTryHookup(pawn) || PawnUtility.WillSoonHaveBasicNeed(pawn))
+            if (!SocialInteractionUtility.CanInitiateInteraction(pawn) || !RomanceUtility.WillPawnTryHookup(pawn) || PawnUtility.WillSoonHaveBasicNeed(pawn))
             {
                 return null;
             }

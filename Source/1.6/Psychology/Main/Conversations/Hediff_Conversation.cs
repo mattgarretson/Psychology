@@ -46,7 +46,7 @@ public class Hediff_Conversation : HediffWithComps
     //    this.pawn.health.RemoveHediff(this);
     //    return;
     //}
-    //if (!this.otherPawn.Spawned || !this.pawn.Spawned || !InteractionUtility.CanReceiveInteraction(this.pawn) || !InteractionUtility.CanReceiveInteraction(this.otherPawn))
+    //if (!this.otherPawn.Spawned || !this.pawn.Spawned || !SocialInteractionUtility.CanReceiveInteraction(this.pawn) || !SocialInteractionUtility.CanReceiveInteraction(this.otherPawn))
     //{
     //    this.pawn.health.RemoveHediff(this);
     //    return;
@@ -63,7 +63,7 @@ public class Hediff_Conversation : HediffWithComps
         this.pawn.health.RemoveHediff(this);
         return;
       }
-      if (!this.otherPawn.Spawned || !this.pawn.Spawned || !InteractionUtility.CanReceiveInteraction(this.pawn) || !InteractionUtility.CanReceiveInteraction(this.otherPawn))
+      if (!this.otherPawn.Spawned || !this.pawn.Spawned || !SocialInteractionUtility.CanReceiveInteraction(this.pawn) || !SocialInteractionUtility.CanReceiveInteraction(this.otherPawn))
       {
         this.pawn.health.RemoveHediff(this);
         return;
