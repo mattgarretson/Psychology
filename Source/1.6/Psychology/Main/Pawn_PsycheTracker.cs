@@ -146,6 +146,11 @@ public class Pawn_PsycheTracker : IExposable
     //float weight = 10f / Mathf.Lerp(1f + 8f * def.controversiality, 1f + 0.5f * def.controversiality, t);
 
     /* Polite pawns will avoid topics they already know are contentious. */
+    if (cachedDisagreementWeights.Count > 5000)
+    {
+      cachedDisagreementWeights.Clear();
+      recalcNodeDisagreement.Clear();
+    }
     Pair<string, string> disagreementKey = new Pair<string, string>(otherPawn.ThingID, def.defName);
     if (cachedDisagreementWeights.TryGetValue(disagreementKey, out float cachedWeight) && !recalcNodeDisagreement[disagreementKey])
     {
@@ -174,6 +179,11 @@ public class Pawn_PsycheTracker : IExposable
     convoMemories = from m in this.pawn.needs.mood.thoughts.memories.Memories.OfType<Thought_MemorySocialDynamic>()
                     where m.def.defName.Contains("Conversation") && m.otherPawn == other
                     select m;
+    if (cachedOpinions.Count > 500)
+    {
+      cachedOpinions.Clear();
+      recalcCachedOpinions.Clear();
+    }
     if (cachedOpinions.ContainsKey(other.ThingID) && !recalcCachedOpinions[other.ThingID])
     {
       return cachedOpinions[other.ThingID];
