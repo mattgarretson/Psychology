@@ -291,7 +291,7 @@ public class PsychologyGameComponent : GameComponent
       TimeAssignmentDef timeAssDef = mayor.GetTimeAssignment();
       bool mayorAvailable = timeAssDef != TimeAssignmentDefOf.Sleep && mayor.GetLord() == null && mayor.Tile == settlement.Map.Tile
                             && mayor.Awake() && !mayor.Drafted && !mayor.Downed && mayor.health.summaryHealth.SummaryHealthPercent >= 1f
-                            && (mayor.CurJob == null || mayor.CurJob.def != JobDefOf.TendPatient || (mayor.CurJob.RecipeDef != null && mayor.CurJob.RecipeDef.workerClass.IsAssignableFrom(typeof(Recipe_Surgery))));
+                            && (mayor.CurJob == null || mayor.CurJob.def != JobDefOf.TendPatient || mayor.CurJob.RecipeDef == null || !mayor.CurJob.RecipeDef.workerClass.IsAssignableFrom(typeof(Recipe_Surgery)));
       if (!mayorAvailable)
       {
         continue;
