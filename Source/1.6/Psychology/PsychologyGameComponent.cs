@@ -48,7 +48,14 @@ public class PsychologyGameComponent : GameComponent
     //SpeciesHelper.RegisterHumanlikeSpeciesLoadedGame(); //ToDo: figure out why this causes crash
     BuildMayorDictionary();
     ImplementSexualOrientation();
-    visitMayorChanceFactor = PsychologySettings.visitMayorMtbHours > 0f ? 2f * constituentTicksPerInterval / (GenDate.TicksPerHour * PsychologySettings.visitMayorMtbHours) : 0f;
+    if (PsychologySettings.visitMayorMtbHours > 0f)
+    {
+      visitMayorChanceFactor = 2f * constituentTicksPerInterval / (GenDate.TicksPerHour * PsychologySettings.visitMayorMtbHours);
+    }
+    else
+    {
+      visitMayorChanceFactor = 0f;
+    }
     //FirstTimeLoadingNewPsychology();
   }
 
