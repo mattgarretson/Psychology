@@ -48,7 +48,7 @@ public class PsychologyGameComponent : GameComponent
     //SpeciesHelper.RegisterHumanlikeSpeciesLoadedGame(); //ToDo: figure out why this causes crash
     BuildMayorDictionary();
     ImplementSexualOrientation();
-    visitMayorChanceFactor = 2f * constituentTicksPerInterval / (GenDate.TicksPerHour * PsychologySettings.visitMayorMtbHours);
+    visitMayorChanceFactor = PsychologySettings.visitMayorMtbHours > 0f ? 2f * constituentTicksPerInterval / (GenDate.TicksPerHour * PsychologySettings.visitMayorMtbHours) : 0f;
     //FirstTimeLoadingNewPsychology();
   }
 
@@ -192,16 +192,17 @@ public class PsychologyGameComponent : GameComponent
 
   public virtual void ImplementSexualOrientation()
   {
-    if (PsychologySettings.enableKinsey)
+    foreach (Pawn pawn in PawnsFinder.All_AliveOrDead)
     {
-      foreach (Pawn pawn in PawnsFinder.All_AliveOrDead)
+      if (pawn?.RaceProps == null || !pawn.RaceProps.Humanlike)
+        continue;
+      if (pawn.story?.traits == null)
+        continue;
+      if (PsychologySettings.enableKinsey)
       {
         PsycheHelper.CorrectTraitsForPawnKinseyEnabled(pawn);
       }
-    }
-    else
-    {
-      foreach (Pawn pawn in PawnsFinder.All_AliveOrDead)
+      else
       {
         PsycheHelper.CorrectTraitsForPawnKinseyDisabled(pawn);
       }
@@ -283,7 +284,7 @@ public class PsychologyGameComponent : GameComponent
       TimeAssignmentDef timeAssDef = mayor.GetTimeAssignment();
       bool mayorAvailable = timeAssDef != TimeAssignmentDefOf.Sleep && mayor.GetLord() == null && mayor.Tile == settlement.Map.Tile
                             && mayor.Awake() && !mayor.Drafted && !mayor.Downed && mayor.health.summaryHealth.SummaryHealthPercent >= 1f
-                            && (mayor.CurJob == null || mayor.CurJob.def != JobDefOf.TendPatient || mayor.CurJob.RecipeDef.workerClass.IsAssignableFrom(typeof(Recipe_Surgery)));
+                            && (mayor.CurJob == null || mayor.CurJob.def != JobDefOf.TendPatient || (mayor.CurJob.RecipeDef != null && mayor.CurJob.RecipeDef.workerClass.IsAssignableFrom(typeof(Recipe_Surgery))));
       if (!mayorAvailable)
       {
         continue;
