@@ -28,7 +28,8 @@ public class Pawn_PsycheTracker : IExposable
 
   public Dictionary<Pair<string, string>, float> cachedDisagreementWeights = new Dictionary<Pair<string, string>, float>();
   public Dictionary<Pair<string, string>, bool> recalcNodeDisagreement = new Dictionary<Pair<string, string>, bool>();
-  public int AdjustedRatingTicker = -1;
+  public int lastAdjustedRatingTick = -1;
+  public const int AdjustedRatingRecalcInterval = 750;
   public Dictionary<MemeDef, Dictionary<PersonalityNodeDef, float>> dailyCertaintyFromMemesAndNodes = new Dictionary<MemeDef, Dictionary<PersonalityNodeDef, float>>();
   public Dictionary<PreceptDef, Dictionary<PersonalityNodeDef, float>> dailyCertaintyFromPerceptsAndNodes = new Dictionary<PreceptDef, Dictionary<PersonalityNodeDef, float>>();
 
@@ -114,16 +115,16 @@ public class Pawn_PsycheTracker : IExposable
       //RawRatingArray[PersonalityNodeMatrix.indexDict[node.def]] = node.rawRating;
       //RawRatingDict[node.def] = node.rawRating;
     }
-    AdjustedRatingTicker = -1;
+    lastAdjustedRatingTick = -1;
   }
 
   public float GetPersonalityRating(PersonalityNodeDef def)
   {
-    if (AdjustedRatingTicker < 0)
+    int currentTick = Find.TickManager.TicksGame;
+    if (lastAdjustedRatingTick < 0 || currentTick - lastAdjustedRatingTick >= AdjustedRatingRecalcInterval)
     {
       CalculateAdjustedRatings();
     }
-    AdjustedRatingTicker--;
     return nodeDict[def].AdjustedRating;
     //return AdjustedRatingDict[def];
   }
@@ -236,7 +237,7 @@ public class Pawn_PsycheTracker : IExposable
     {
       node.AdjustedRating = adjustedRatingList[PersonalityNodeMatrix.indexDict[node.def]];
     }
-    AdjustedRatingTicker = 500;
+    lastAdjustedRatingTick = Find.TickManager.TicksGame;
     //string text = "AdjustForCircumstance, total timings in ms:";
     //for (index = 0; index < PsycheHelper.CircumstanceTimings.Count(); index++)
     //{
