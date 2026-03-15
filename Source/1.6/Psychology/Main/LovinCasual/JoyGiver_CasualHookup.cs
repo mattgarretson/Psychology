@@ -1,8 +1,4 @@
-﻿using HarmonyLib;
-using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿﻿using RimWorld;
 using Verse;
 using Verse.AI;
 
@@ -16,22 +12,11 @@ namespace Psychology
             {
                 return null;
             }
-            //if (!PsychologySettings.enableHookups)
-            //{
-            //    return null;
-            //}
             if (PsychologySettings.hookupRateMultiplier == 0f)
             {
                 return null;
             }
-            //float percentRate = pawn.HookupRate() / 2;
             float percentRate = 50f * PsychologySettings.hookupRateMultiplier;
-
-            //Asexual pawns will never initiate sex
-            //if (pawn.story.traits.HasTrait(TraitDefOf.Asexual))
-            //{
-            //    return null;
-            //}
             if (PsychologySettings.enableKinsey)
             {
                 if (PsycheHelper.Comp(pawn).Sexuality.IsAsexual)
@@ -59,17 +44,7 @@ namespace Psychology
                 Comp_PartnerList comp = pawn.TryGetComp<Comp_PartnerList>();
                 if (comp == null)
                 {
-                    FieldInfo field = AccessTools.Field(typeof(ThingWithComps), "comps");
-                    List<ThingComp> compList = (List<ThingComp>)field.GetValue(pawn);
-                    ThingComp newComp = (ThingComp)Activator.CreateInstance(typeof(Comp_PartnerList));
-                    newComp.parent = pawn;
-                    compList.Add(newComp);
-                    newComp.Initialize(new CompProperties_PartnerList());
-                    comp = pawn.TryGetComp<Comp_PartnerList>();
-                    if (comp == null)
-                    {
-                        Log.Error("Unable to add Comp_HookupList");
-                    }
+                    return null;
                 }
                 Pawn partner = comp.GetPartner(true);
                 if (partner == null || !partner.Spawned || !partner.Awake())
