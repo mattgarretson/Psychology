@@ -1,7 +1,7 @@
 ﻿using UnityEngine;using RimWorld;using Verse;using Verse.Sound;using System;using System.Runtime.Remoting.Contexts;using HarmonyLib;using UnityEngine.UIElements.Experimental;using System.Reflection;using System.Collections.Generic;using System.Reflection.Emit;using System.Linq;
 using RimWorld.Planet;
 
-namespace Psychology.Harmony;
+namespace Psychology.Harmony;
 [StaticConstructorOnStartup]
 public class VanillaPsycastersExpanded_Patches
 {
@@ -68,7 +68,7 @@ public class AbilityExtension_WordOfLove_Valid_Patch{    [HarmonyPostfix]    
         foreach (var target in targets)
         {
             Pawn pawn = target.Thing as Pawn;
-            if (!PsycheHelper.PsychologyEnabled(pawn))
+            if (pawn == null || !PsycheHelper.PsychologyEnabled(pawn))
             {
                 continue;
             }
