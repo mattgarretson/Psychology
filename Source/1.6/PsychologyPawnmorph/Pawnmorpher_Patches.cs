@@ -179,7 +179,6 @@ public class Pawnmorph_Patches_FormerHumanUtilities_TransferEverything
     [HarmonyPostfix]
     public static void Postfix(Pawn original, Pawn transformedPawn)
     {
-        Log.Warning("Pawnmorph_Patches_FormerHumanUtilities_TransferEverything.Postfix fired!");
         if (PsycheHelper.TryGetPawnSeed(original) != true)
         {
             Log.Error("Pawnmorph_Patches_FormerHumanUtilities_TransferEverything.Postfix, TryGetPawnSeed failed on original");
