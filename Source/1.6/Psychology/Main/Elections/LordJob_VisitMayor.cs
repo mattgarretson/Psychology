@@ -50,8 +50,8 @@ namespace Psychology
             transition.AddTrigger(new Trigger_TickCondition(() => this.mayor.Drafted || this.constituent.Drafted));
             transition.AddTrigger(new Trigger_PawnLost());
             stateGraph.AddTransition(transition);
-            //Time of meeting is affected by the constituents' mood; meetings to complain can take longer than meetings to commend.
-            this.timeoutTrigger = new Trigger_TicksPassed(Rand.RangeInclusive(GenDate.TicksPerHour, Mathf.RoundToInt(GenDate.TicksPerHour / Mathf.Lerp(0.2f, 1f, constituent.needs.mood.CurLevel))));
+            //Time of meeting is affected by the constituents' mood; meetings to complain can take longer than meetings to commend. Capped at 2 hours.
+            this.timeoutTrigger = new Trigger_TicksPassed(Rand.RangeInclusive(GenDate.TicksPerHour, Mathf.Min(2 * GenDate.TicksPerHour, Mathf.RoundToInt(GenDate.TicksPerHour / Mathf.Lerp(0.2f, 1f, constituent.needs.mood.CurLevel)))));
             Transition transition2 = new Transition(lordToil_Meeting, lordToil_End);
             transition2.AddTrigger(this.timeoutTrigger);
             transition2.AddPreAction(new TransitionAction_Custom((Action)delegate
@@ -68,6 +68,7 @@ namespace Psychology
             Scribe_References.Look(ref this.constituent, "constituent");
             Scribe_References.Look(ref this.mayor, "mayor");
             Scribe_Values.Look(ref this.complaint, "complaining");
+            Scribe_Values.Look(ref this.ticksInSameRoom, "ticksInSameRoom", 0);
         }
 
         
@@ -84,19 +85,18 @@ namespace Psychology
                 complaintDef.durationDays = 1f + 4f * this.mayor.GetStatValue(StatDefOf.SocialImpact);
                 //Constituent thought duration affected by mayor's Social stat
                 complaintDef.thoughtClass = typeof(Thought_MemoryDynamic);
-                complaintDef.stackedEffectMultiplier = 1f;
-                complaintDef.stackLimit = 999;
+                complaintDef.stackedEffectMultiplier = 0.5f;
+                complaintDef.stackLimit = 5;
                 ThoughtStage complaintStage = new ThoughtStage();
-                float complaintMood = 18f * (PsycheHelper.Comp(mayor).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Empathetic) - 0.33f);
-                //Base complaint mood determined by mayor's Empathetic trait
-                complaintMood *= (float)this.ticksInSameRoom / (float)GenDate.TicksPerHour;
-                //Length of meeting also affects mood
-                complaintMood *= complaintMood < 0f ? Mathf.Lerp(1.25f, 0.75f, PsycheHelper.Comp(mayor).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Polite)) : 1f;
-                //Negative meeting thoughts (unempathetic mayors) mitigated by mayor's politeness
+                //Venting is always positive for the constituent; empathetic mayors make it even better
+                float empathy = PsycheHelper.Comp(mayor).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Empathetic);
+                float complaintMood = 4f + 10f * empathy;
+                //Scale by meeting length (fraction of an hour)
+                complaintMood *= Mathf.Min((float)this.ticksInSameRoom / (float)GenDate.TicksPerHour, 1f);
+                //Beauty of the room has a small positive effect
                 complaintMood += 0.1f * BeautyUtility.AverageBeautyPerceptible(this.constituent.Position, this.constituent.Map);
-                //Beauty of the room has a net positive effect on the thought
-                complaintMood *= 0.5f + PsycheHelper.Comp(constituent).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Judgmental);
                 //Constituent's Judgmental trait changes how much the thought affects them
+                complaintMood *= 0.5f + PsycheHelper.Comp(constituent).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Judgmental);
                 complaintStage.label = "ComplaintLabel".Translate();
                 complaintStage.description = "ComplaintDesc".Translate();
                 complaintStage.baseMoodEffect = Mathf.RoundToInt(complaintMood);
@@ -162,6 +162,13 @@ namespace Psychology
 
         private bool ShouldBeCalledOff()
         {
+            if (this.ticksInSameRoom > 2 * GenDate.TicksPerHour
+                || this.constituent.needs.food?.Starving == true || this.mayor.needs.food?.Starving == true
+                || this.constituent.needs.rest?.CurLevel < 0.1f || this.mayor.needs.rest?.CurLevel < 0.1f
+                || this.constituent.InMentalState || this.mayor.InMentalState)
+            {
+                return true;
+            }
             return !GatheringsUtility.AcceptableGameConditionsToContinueGathering(base.Map) || this.constituent.GetTimeAssignment() == TimeAssignmentDefOf.Work || this.mayor.GetTimeAssignment() == TimeAssignmentDefOf.Work || (!this.spot.Roofed(base.Map) && !JoyUtility.EnjoyableOutsideNow(base.Map, null));
         }
 
