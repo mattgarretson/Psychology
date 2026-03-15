@@ -46,7 +46,7 @@ public class Hediff_Anxiety : HediffWithComps
         {
             return;
         }
-        if (pawn.jobs.curDriver.asleep)
+        if (pawn.jobs.curDriver != null && pawn.jobs.curDriver.asleep)
         {
             pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfPsychology.DreamNightmare);
             pawn.mindState.mentalStateHandler.TryStartMentalState(MentalStateDefOfPsychology.PanicAttack, forceWake: true);

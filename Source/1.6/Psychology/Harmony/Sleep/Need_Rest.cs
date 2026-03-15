@@ -65,7 +65,10 @@ public static class Need_Rest_IntervalInsomniacPatch
             {
                 if (Rand.MTBEventOccurs((Need_Rest.DefaultNaturalWakeThreshold - __instance.CurLevel) / 4f, GenDate.TicksPerDay, 150f) && !pawn.Awake())
                 {
-                    pawn.jobs.curDriver.asleep = false;
+                    if (pawn.jobs.curDriver != null)
+                    {
+                        pawn.jobs.curDriver.asleep = false;
+                    }
                     pawn.jobs.EndCurrentJob(JobCondition.InterruptForced);
                 }
             }
