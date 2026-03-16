@@ -55,35 +55,20 @@ public static class InteractionUtility_SocialFightVerb_Patch
     [HarmonyPostfix]
     public static void RemoveBiting(ref Verb verb, Pawn p)
     {
-        //Verb v = null;
-        //(from x in p.verbTracker.AllVerbs
-        // where x.IsMeleeAttack && x.IsStillUsableBy(p) && x.verbProps?.meleeDamageDef?.label != "bite"
-        // select x).TryRandomElementByWeight((Verb x) => x.verbProps.AdjustedMeleeDamageAmount(x, p), out v);
-        //if (v != null)
-        //{
-        //    verb = v;
-        //}
         if (verb == null)
         {
             return;
         }
-        if (verb.verbProps.meleeDamageDef.label != "bite")
+        if (verb.verbProps?.meleeDamageDef?.label != "bite")
         {
             return;
         }
-        int iter = 0;
-        while (iter < 20)
+        (from x in p.verbTracker.AllVerbs
+         where x.IsMeleeAttack && x.IsStillUsableBy(p) && x.verbProps?.meleeDamageDef?.label != "bite"
+         select x).TryRandomElementByWeight((Verb x) => x.verbProps.AdjustedMeleeDamageAmount(x, p), out Verb v);
+        if (v != null)
         {
-            SocialInteractionUtility.TryGetRandomVerbForSocialFight(p, out Verb v);
-            if (v != null)
-            {
-                if (v.verbProps?.meleeDamageDef?.label != "bite")
-                {
-                    verb = v;
-                    return;
-                }
-            }
-            iter++;
+            verb = v;
         }
     }
 }
