@@ -128,7 +128,7 @@ public class Hediff_Conversation : HediffWithComps
   {
 
     base.PostRemoved();
-    if (this.pawn == null && this.otherPawn == null)
+    if (this.pawn == null || this.otherPawn == null)
     {
       Log.Warning("Hediff_Conversation.PostRemoved(), pawns were null");
       return;
@@ -148,23 +148,23 @@ public class Hediff_Conversation : HediffWithComps
     string talkDesc;
     if (this.ageTicks < 500)
     {
-      int numShortTalks = int.Parse("NumberOfShortTalks".Translate());
-      talkDesc = "ShortTalk" + Rand.RangeInclusive(1, numShortTalks);
+      int.TryParse("NumberOfShortTalks".Translate(), out int numShortTalks);
+      talkDesc = "ShortTalk" + Rand.RangeInclusive(1, Math.Max(1, numShortTalks));
     }
     else if (this.ageTicks < GenDate.TicksPerHour / 2)
     {
-      int numNormalTalks = int.Parse("NumberOfNormalTalks".Translate());
-      talkDesc = "NormalTalk" + Rand.RangeInclusive(1, numNormalTalks);
+      int.TryParse("NumberOfNormalTalks".Translate(), out int numNormalTalks);
+      talkDesc = "NormalTalk" + Rand.RangeInclusive(1, Math.Max(1, numNormalTalks));
     }
     else if (this.ageTicks < GenDate.TicksPerHour * 2.5)
     {
-      int numLongTalks = int.Parse("NumberOfLongTalks".Translate());
-      talkDesc = "LongTalk" + Rand.RangeInclusive(1, numLongTalks);
+      int.TryParse("NumberOfLongTalks".Translate(), out int numLongTalks);
+      talkDesc = "LongTalk" + Rand.RangeInclusive(1, Math.Max(1, numLongTalks));
     }
     else
     {
-      int numEpicTalks = int.Parse("NumberOfEpicTalks".Translate());
-      talkDesc = "EpicTalk" + Rand.RangeInclusive(1, numEpicTalks);
+      int.TryParse("NumberOfEpicTalks".Translate(), out int numEpicTalks);
+      talkDesc = "EpicTalk" + Rand.RangeInclusive(1, Math.Max(1, numEpicTalks));
     }
     //Log.Message("Hediff_Conversation.PostRemoved(), pawn = " + pawn.LabelShort + " otherPawn = " + otherPawn.LabelShort + ", step 1");
     float opinionMod;
@@ -353,7 +353,7 @@ public class Hediff_Conversation : HediffWithComps
       this.pawn.needs.mood.thoughts.memories.TryGainMemory(def, this.otherPawn);
       return true;
     }
-    convoMemories.OrderByDescending(m => Mathf.Abs(m.OpinionOffset()));
+    convoMemories = convoMemories.OrderByDescending(m => Mathf.Abs(m.OpinionOffset()));
     IEnumerable<Thought_MemorySocialDynamic> keptMemories = convoMemories.Take(maxConvoOpinions - 1);
     IEnumerable<Thought_MemorySocialDynamic> removedMemories = convoMemories.Except(keptMemories);
 

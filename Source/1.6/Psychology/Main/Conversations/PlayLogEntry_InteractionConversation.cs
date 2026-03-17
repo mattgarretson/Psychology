@@ -24,7 +24,7 @@ public class PlayLogEntry_InteractionConversation : PlayLogEntry_Interaction
     public override void ExposeData()
     {
         base.ExposeData();
-        for (int i = 0; i < rulesInit.Capacity; i++)
+        for (int i = 0; i < rulesInit.Count; i++)
         {
             if(i+1 > this.rulesInit.Count)
             {
