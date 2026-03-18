@@ -198,9 +198,9 @@ public static class LovePartnerRelationUtility_PolygamousSpousePatch
   {
     if (pawn.story.traits.HasTrait(TraitDefOfPsychology.Polygamous))
     {
-      IEnumerable<Pawn> spouses = (from p in pawn.relations.RelatedPawns
-                                   where pawn.relations.DirectRelationExists(PawnRelationDefOf.Spouse, p)
-                                   select p);
+      List<Pawn> spouses = (from p in pawn.relations.RelatedPawns
+                            where pawn.relations.DirectRelationExists(PawnRelationDefOf.Spouse, p)
+                            select p).ToList();
       foreach (Pawn spousePawn in spouses)
       {
         if (!spousePawn.story.traits.HasTrait(TraitDefOfPsychology.Polygamous))
