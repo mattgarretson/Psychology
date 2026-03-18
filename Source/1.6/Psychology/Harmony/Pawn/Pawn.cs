@@ -66,7 +66,10 @@ public static class Pawn_PreTradedPatch
             {
                 foreach (Pawn current in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_FreeColonistsAndPrisoners)
                 {
-                    current.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfPsychology.KnowPrisonerSoldBleedingHeart, null);
+                    if (current.needs?.mood != null)
+                    {
+                        current.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfPsychology.KnowPrisonerSoldBleedingHeart, null);
+                    }
                 }
             }
         }

@@ -64,7 +64,10 @@ public static class ThoughtUtility_ExecutedPatch
         }
         foreach (Pawn current in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_FreeColonistsAndPrisoners)
         {
-            current.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(def, forcedStage), null);
+            if (current.needs?.mood != null)
+            {
+                current.needs.mood.thoughts.memories.TryGainMemory(ThoughtMaker.MakeThought(def, forcedStage), null);
+            }
         }
     }
 }
@@ -90,6 +93,10 @@ public static class ThoughtUtility_OrganHarvestedPatch
         }
         foreach (Pawn current in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_FreeColonistsAndPrisoners)
         {
+            if (current.needs?.mood == null)
+            {
+                continue;
+            }
             if (current == victim)
             {
                 current.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOf.MyOrganHarvested, null);
