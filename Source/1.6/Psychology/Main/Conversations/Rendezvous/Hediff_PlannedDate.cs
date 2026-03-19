@@ -23,7 +23,7 @@ namespace Psychology
         public override void Tick()
         {
             base.Tick();
-            if(!LovePartnerRelationUtility.LovePartnerRelationExists(this.pawn, this.partner))
+            if(this.partner == null || !LovePartnerRelationUtility.LovePartnerRelationExists(this.pawn, this.partner))
             {
                 this.pawn.health.RemoveHediff(this);
             }
@@ -65,9 +65,9 @@ namespace Psychology
 
         private static bool ShouldStartDate(Pawn p, Pawn partner)
         {
-            return !p.Downed && (p.needs == null || !p.needs.food.Starving)
+            return !p.Downed && (p.needs == null || (!p.needs.food.Starving
+                && p.needs.rest.CurCategory < RestCategory.Exhausted))
                 && p.health.hediffSet.BleedRateTotal <= 0f
-                && p.needs.rest.CurCategory < RestCategory.Exhausted
                 && !p.InAggroMentalState && !p.IsPrisoner
                 && p.GetTimeAssignment() != TimeAssignmentDefOf.Work
                 && !p.Drafted && p.Map == partner.Map;
