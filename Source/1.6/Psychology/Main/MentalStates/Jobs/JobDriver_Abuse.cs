@@ -56,6 +56,7 @@ namespace Psychology
             ToilFailConditions.FailOnDespawnedOrNull(this, TargetIndex.A);
             ToilFailConditions.FailOnDowned(this, TargetIndex.A);
             Pawn target = this.TargetA.Thing as Pawn;
+            if (target == null) yield break;
             yield return JobDriver_Abuse.ReachTarget(target);
             yield return JobDriver_Abuse.AbuseTarget(target);
             yield break;

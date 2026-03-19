@@ -12,7 +12,6 @@ namespace Psychology
     {
         protected override Job TryGiveJob(Pawn pawn)
         {
-            Log.Warning("JobGiver_GoHunting, TryGiveJob fired!");
             if (pawn.Map == null)
             {
                 return null;
@@ -52,7 +51,7 @@ namespace Psychology
             {
                 return new Job(JobDefOfPsychology.BreakHunt, assignedPrey);
             }
-            IEnumerable<Pawn> wildlife = from p in Find.CurrentMap.mapPawns.AllPawns
+            IEnumerable<Pawn> wildlife = from p in pawn.Map.mapPawns.AllPawns
                                          where p.Spawned && p.Faction == null && p.AnimalOrWildMan() && !p.Position.Fogged(p.Map) && pawn.CanReserve(p, 1, -1, null, true)
                                          select p;
             if (wildlife.Count() > 0)

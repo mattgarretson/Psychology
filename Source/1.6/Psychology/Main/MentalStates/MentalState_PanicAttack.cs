@@ -16,7 +16,7 @@ public class MentalState_PanicAttack : MentalState
 
     public override void PreStart()
     {
-        if (pawn.jobs.curDriver.asleep)
+        if (pawn.jobs.curDriver != null && pawn.jobs.curDriver.asleep)
         {
             pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDefOfPsychology.DreamNightmare);
         }
@@ -69,7 +69,7 @@ public class MentalState_PanicAttack : MentalState
         {
             return;
         }
-        if (pawn.jobs.curJob.def != JobDefOf.FleeAndCower)
+        if (pawn.jobs.curJob == null || pawn.jobs.curJob.def != JobDefOf.FleeAndCower)
         {
             pawn.jobs.StartJob(new Job(JobDefOf.FleeAndCower, pawn.Position), JobCondition.InterruptForced, null, false, true, null);
         }

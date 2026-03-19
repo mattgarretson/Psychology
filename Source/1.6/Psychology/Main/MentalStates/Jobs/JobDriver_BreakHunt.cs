@@ -23,7 +23,7 @@ public class JobDriver_BreakHunt : JobDriver
     {
         ToilFailConditions.FailOnDespawnedOrNull(this, TargetIndex.A);
         Pawn prey = this.TargetA.Thing as Pawn;
-        if (prey.Dead)
+        if (prey == null || prey.Dead)
         {
             this.EndJobWith(JobCondition.Succeeded);
         }
