@@ -8,7 +8,6 @@ using Verse;
 using Verse.AI;
 using Verse.AI.Group;
 using HarmonyLib;
-using System.Reflection.Emit;
 
 namespace Psychology.Harmony
 {
