@@ -4,13 +4,9 @@ using System.Linq;
 using System.Text;
 using RimWorld;
 using Verse;
-using Verse.AI;
 using HarmonyLib;
 using UnityEngine;
 using System.Diagnostics;
-using System.Security.Cryptography;
-using System.Runtime.CompilerServices;
-using UnityEngine.UIElements.Experimental;
 using System.Reflection;
 
 namespace Psychology;
@@ -684,68 +680,6 @@ public class Pawn_PsycheTracker : IExposable
     }
     return newRawRatings;
   }
-
-  //public string IdeoAbilityEffectOnPsycheTooltip(float multiplier)
-  //{
-  //    Ideo ideo = this.pawn.Ideo;
-  //    int index;
-  //    // Calculate current compatibility 
-  //    CalculateAdjustedRatings();
-  //    float oldDailyChange = CalculateCertaintyChangePerDay(ideo, true);
-  //    float[] oldRawRatings = new float[PersonalityNodeMatrix.order];
-  //    //float[] oldAdjRatings = new float[PersonalityNodeMatrix.order];
-
-  //    float[] newRawRatings = RatingsAfterBoostTowardsIdeo(ideo, multiplier, true);
-  //    //float[] newAdjRatings = new float[PersonalityNodeMatrix.order];
-  //    foreach (PersonalityNode node in this.nodes)
-  //    {
-  //        index = PersonalityNodeMatrix.indexDict[node.def];
-  //        // Store old raw ratings
-  //        oldRawRatings[index] = node.rawRating;
-  //        // Store old adjusted ratings
-  //        //oldAdjRatings[index] = node.AdjustedRating;
-  //        // Set raw to new ratings
-  //        node.rawRating = newRawRatings[index];
-  //    }
-  //    // Calculate new adjusted ratings and compatibility
-  //    CalculateAdjustedRatings();
-  //    float newDailyChange = CalculateCertaintyChangePerDay(ideo, false);
-  //    foreach (PersonalityNode node in this.nodes)
-  //    {
-  //        //index = PersonalityNodeMatrix.indexDict[node.def];
-  //        // Store new adjusted ratings
-  //        //newAdjRatings[index] = node.AdjustedRating;
-  //        // Restore old raw ratings
-  //        //node.rawRating = oldRawRatings[index];
-  //    }
-  //    // Restore old adjusted ratings
-  //    CalculateAdjustedRatings();
-
-  //    //List<Pair<PersonalityNodeDef, float>> list = new List<Pair<PersonalityNodeDef, float>>();
-  //    //foreach (PersonalityNodeDef nodeDef in PersonalityNodeMatrix.defList)
-  //    //{
-  //    //    //index = PersonalityNodeMatrix.indexDict[nodeDef];
-  //    //    //list.Add(new Pair<PersonalityNodeDef, float>(nodeDef, newAdjRatings[index] - oldAdjRatings[index]));
-  //    //}
-  //    //list.OrderBy(x => -Mathf.Abs(x.Second));
-
-  //    //string text = "";
-  //    //text += "Counseling will alter {PAWN_possessive} personality to be more compatible with {IDEO}.";
-  //    //text += "\n\nEffects on psyche";
-  //    //text += "\n -  Certainty change per day increases on average by " + (newCompat - oldCompat).ToStringPercent();
-
-  //    string oldPercent = (oldDailyChange > 0f ? "+" : "") + oldDailyChange.ToStringPercent();
-  //    string newPercent = (newDailyChange > 0f ? "+" : "") + newDailyChange.ToStringPercent();
-
-  //    // ToDo: turn this into translation
-  //    string text = "Effect on daily certainty change due to personality:\nShould increase from " + oldPercent + " to " + newPercent + ", up to some randomness.";
-  //    if (newDailyChange < oldDailyChange)
-  //    {
-  //        Log.Error("New daily change is lower than old daily change");
-  //    }
-  //    return text;
-  //}
-
 }
 
 

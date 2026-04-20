@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using RimWorld;
 using UnityEngine;
 using Verse;
@@ -13,8 +12,6 @@ public static class PersonalityNodeIdeoUtility
 {
     public static Dictionary<MemeDef, Dictionary<PersonalityNodeDef, float>> memesAffectedByNodes = new Dictionary<MemeDef, Dictionary<PersonalityNodeDef, float>>();
     public static Dictionary<PreceptDef, Dictionary<PersonalityNodeDef, float>> preceptsAffectedByNodes = new Dictionary<PreceptDef, Dictionary<PersonalityNodeDef, float>>();
-    //public static Dictionary<PersonalityNodeDef, List<PersonalityNodeMemeCertaintyModifier>> nodeDefsWithMemes;
-    //public static Dictionary<PersonalityNodeDef, List<PersonalityNodePreceptCertaintyModifier>> nodeDefsWithPrecepts;
 
     static PersonalityNodeIdeoUtility()
     {

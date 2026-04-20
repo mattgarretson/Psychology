@@ -134,9 +134,6 @@ public class PsychologySettings : ModSettings
   private const bool enableAnxietyDefault = true; // v1.1
   private static bool enableAnxiety = true; // v1.1
 
-  public const float convoOpinionMultiplierDefault = 1f;
-  public static float convoOpinionMultiplier = 1f;
-
   public override void ExposeData()
   {
     //Log.Message("PsychologySettings, ExposeData start");
@@ -151,7 +148,6 @@ public class PsychologySettings : ModSettings
     ScribeValueAndAddToNameList(nameof(mentalBreakAnxietyChance));
     ScribeValueAndAddToNameList(nameof(imprisonedDebuff));
     ScribeValueAndAddToNameList(nameof(conversationDuration));
-    //ScribeValueAndAddToNameList(nameof(convoOpinionMultiplier));
     ScribeValueAndAddToNameList(nameof(convoMaxOpinionChange));
     ScribeValueAndAddToNameList(nameof(convoMeanHours));
     ScribeValueAndAddToNameList(nameof(convoTimeScaleHours));
@@ -174,8 +170,6 @@ public class PsychologySettings : ModSettings
 
     /* Deprecated settings. Set each to default and use forceSave = false to essentially delete them from savefile */
     Scribe_Values.Look(ref enableAnxiety, "Psychology_EnableAnxiety", enableAnxietyDefault);
-    enableAnxiety = enableAnxietyDefault;
-    Scribe_Values.Look(ref convoOpinionMultiplier, "Psychology_ConvoOpinionMultiplier", convoOpinionMultiplierDefault);
     enableAnxiety = enableAnxietyDefault;
 
     //Log.Message("PsychologySettings, ExposeData end");
