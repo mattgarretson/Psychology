@@ -20,10 +20,6 @@ public static class TraitSet_GainTrait_Patch
         {
             return;
         }
-        if (PsycheHelper.TryGetPawnSeed(___pawn) != true)
-        {
-            return;
-        }
         if (PsycheHelper.PsychologyEnabled(___pawn) != true)
         {
             return;
@@ -63,11 +59,6 @@ public class TraitSet_ManualPatches
         else
         {
             return true;
-        }
-        if (PsycheHelper.TryGetPawnSeed(___pawn) != true)
-        {
-            Log.Error("GainTrait_KinseyEnabledPrefix, unable to get seed for pawn " + ___pawn + " and trait " + trait);
-            return false;
         }
         if (PsycheHelper.PsychologyEnabled(___pawn) != true)
         {

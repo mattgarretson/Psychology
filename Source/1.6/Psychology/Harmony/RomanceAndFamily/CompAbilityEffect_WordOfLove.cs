@@ -114,10 +114,6 @@ public static class CompAbilityEffect_WordOfLove_KinseyEnabledPatches
 
     public static bool AsexualCheckKinseyEnabled(Pawn pawn)
     {
-        if (PsycheHelper.TryGetPawnSeed(pawn) != true)
-        {
-            return false;
-        }
         if (PsycheHelper.PsychologyEnabled(pawn) != true)
         {
             return false;
@@ -127,10 +123,6 @@ public static class CompAbilityEffect_WordOfLove_KinseyEnabledPatches
 
     public static bool BisexualCheckKinseyEnabled(Pawn pawn)
     {
-        if (PsycheHelper.TryGetPawnSeed(pawn) != true)
-        {
-            return false;
-        }
         if (PsycheHelper.PsychologyEnabled(pawn) != true)
         {
             return false;
@@ -141,10 +133,6 @@ public static class CompAbilityEffect_WordOfLove_KinseyEnabledPatches
 
     public static bool GayCheckKinseyEnabled(Pawn pawn)
     {
-        if (PsycheHelper.TryGetPawnSeed(pawn) != true)
-        {
-            return false;
-        }
         if (PsycheHelper.PsychologyEnabled(pawn) != true)
         {
             return false;

@@ -83,15 +83,6 @@ public static class ChildRelationUtility_ManualPatches
     public static bool HasTraitGayKinseyEnabled(Pawn parent)
     {
         bool flag = true;
-        if (PsycheHelper.TryGetPawnSeed(parent) != true)
-        {
-            flag = PsycheHelper.HasTraitDef(parent, TraitDefOf.Gay);
-            if (flag)
-            {
-                Log.Error("ChanceOfBecomingChildOf.HasTraitGayKinseyEnabled, TryGetPawnSeed(parent) != true but pawn has TraitDefOf.Gay");
-            }
-            return flag;
-        }
         if (PsycheHelper.PsychologyEnabled(parent) != true)
         {
             flag = PsycheHelper.HasTraitDef(parent, TraitDefOf.Gay);
@@ -107,11 +98,6 @@ public static class ChildRelationUtility_ManualPatches
 
     public static float KinseyEnabledMultiplier(float oldMultiplier, Pawn parent)
     {
-        if (PsycheHelper.TryGetPawnSeed(parent) != true)
-        {
-            Log.Error("ChanceOfBecomingChildOf.KinseyEnabledMultiplier, using old multiplier because TryGetPawnSeed(parent) != true");
-            return oldMultiplier;
-        }
         if (PsycheHelper.PsychologyEnabled(parent) != true)
         {
             Log.Error("ChanceOfBecomingChildOf.KinseyEnabledMultiplier, using old multiplier because PsychologyEnabled(parent) != true");

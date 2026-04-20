@@ -117,15 +117,6 @@ public static class PawnRelationWorker_Sibling_ManualPatches
     public static bool DivorceBasedOnSexuality(Pawn parent)
     {
         bool flag = true;
-        if (PsycheHelper.TryGetPawnSeed(parent) != true)
-        {
-            flag = PsycheHelper.HasTraitDef(parent, TraitDefOf.Gay);
-            if (flag)
-            {
-                Log.Error("CreateRelations.DivorceBasedOnSexuality, TryGetPawnSeed(parent) != true but pawn has TraitDefOf.Gay");
-            }
-            return flag;
-        }
         if (PsycheHelper.PsychologyEnabled(parent) != true)
         {
             flag = PsycheHelper.HasTraitDef(parent, TraitDefOf.Gay);
