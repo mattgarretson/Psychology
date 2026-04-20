@@ -80,7 +80,5 @@ public static class ThoughtDefOfPsychology
   /* Casual lovin */
   public static ThoughtDef FailedHookupAttemptOnMe;
   public static ThoughtDef RebuffedMyHookupAttempt;
-  [MayRequireIdeology]
-  public static ThoughtDef GotLovin_Horrible;
 
 }

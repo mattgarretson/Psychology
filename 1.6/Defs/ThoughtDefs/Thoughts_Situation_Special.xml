@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Defs>
   <ThoughtDef>
-    <defName>ColonistLeftUnburiedBleedingHeart</defName>
-    <workerClass>ThoughtWorker_ColonistLeftUnburied</workerClass>
-    <requiredTraits>
-      <li>BleedingHeart</li>
-    </requiredTraits>
-    <stages>
-      <li>
-        <label>colonist left unburied</label>
-        <description>One of us died and we're just leaving them lying in the open. I can't stop thinking about it. How can we allow them to rot out there like that?</description>
-        <baseMoodEffect>-15</baseMoodEffect>
-      </li>
-    </stages>
-  </ThoughtDef>
-  
-  <ThoughtDef>
     <defName>NakedPrude</defName>
     <workerClass>ThoughtWorker_PsychologicallyNude</workerClass>
     <requiredTraits>
