@@ -2,8 +2,6 @@
 using Verse;
 using RimWorld;
 using System;
-using System.Runtime.Remoting.Contexts;
-using UnityEngine.UIElements.Experimental;
 using System.Reflection;
 using System.Diagnostics;
 
@@ -200,13 +198,6 @@ public class ManualPatches
       Log.Error("Psychology: failed to patch RelationsUtility.AttractedToGender, " + ex);
     }
   }
-
-  //public static void IdeoPatches(HarmonyLib.Harmony harmonyInstance)
-  //{
-  //    //originalInfo = AccessTools.Method(typeof(PawnGenerator), nameof(PawnGenerator.GeneratePawn), new Type[] { typeof(PawnGenerationRequest) });
-  //    //harmonyMethod = new HarmonyMethod(typeof(PawnGenerator_ManualPatches), nameof(PawnGenerator_ManualPatches.GeneratePawn_IdeoCache_Postfix));
-  //    //harmonyInstance.Patch(originalInfo, postfix: harmonyMethod);
-  //}
 }
 
 

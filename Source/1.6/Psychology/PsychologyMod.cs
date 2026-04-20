@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Reflection;
 using RimWorld;
-using RimWorld.Planet;
 using Verse;
-using Verse.AI.Group;
-using Verse.Grammar;
 using UnityEngine;
-using Verse.Noise;
-using Unity;
 
 namespace Psychology;
 
