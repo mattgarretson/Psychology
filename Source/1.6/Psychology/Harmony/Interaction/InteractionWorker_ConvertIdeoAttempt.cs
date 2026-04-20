@@ -15,6 +15,7 @@ namespace Psychology.Harmony
     {
         public static void RandomSelectionWeight(ref float __result, Pawn initiator, Pawn recipient)
         {
+            if (!PsycheHelper.PsychologyEnabled(initiator) || !PsycheHelper.PsychologyEnabled(recipient)) return;
             float initOutspoken = PsycheHelper.Comp(initiator).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Outspoken);
             float initJudgmental = PsycheHelper.Comp(initiator).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Judgmental);
             float initMoralistic = PsycheHelper.Comp(initiator).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Moralistic);
@@ -29,6 +30,7 @@ namespace Psychology.Harmony
     {
         public static void CertaintyReduction(ref float __result, Pawn initiator, Pawn recipient)
         {
+            if (!PsycheHelper.PsychologyEnabled(initiator) || !PsycheHelper.PsychologyEnabled(recipient)) return;
             float initCool = PsycheHelper.Comp(initiator).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Cool);
             float reciNaive = PsycheHelper.Comp(recipient).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Naive);
             float reciNostalgic = PsycheHelper.Comp(recipient).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Nostalgic);
