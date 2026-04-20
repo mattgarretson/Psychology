@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Linq;
 using UnityEngine;
 using Verse;
-using UnityEditor;
 
 namespace Psychology;
 
@@ -904,18 +903,6 @@ public class PsycheCardUtility
     //  // Added 0.5f here to make the big five ratings have a bell shaped curve along the range of 0 to 1;
     //  bigFiveRatings[p] = PsycheHelper.NormalCDF(0.5f * PersonalityNodeMatrix.bigFiveStandardDevInvs[p] * dotProduct);
     //}
-  }
-
-  // Legacy method
-  public static void DrawPsycheMenuCard(Rect totalRect, Pawn pawn)
-  {
-    Find.WindowStack.Add(new Dialog_ViewPsyche(pawn, true));
-  }
-
-  //Legacy method
-  public static void DrawDebugOptions(Rect totalRect, Pawn pawn)
-  {
-    Find.WindowStack.Add(new Dialog_EditPsyche(pawn));
   }
 
   public static void CheckIfCachedChanged(Pawn pawn)

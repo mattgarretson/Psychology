@@ -2,16 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Reflection;
 using RimWorld;
-using RimWorld.Planet;
 using Verse;
-using Verse.AI.Group;
-using Verse.Grammar;
 using UnityEngine;
-using Verse.Noise;
-using Unity;
 using HarmonyLib;
 
 namespace Psychology;
@@ -235,40 +229,6 @@ public static class SettingsWindowUtility
       speciesViewHeight += RowHeight;
     }
 
-
-    //List<string> labelList = new List<string>();
-    //List<string> repeatList = new List<string>();
-    //foreach (KeyValuePair<string, SpeciesSettings> kvp in speciesDictCached)
-    //{
-    //    string label = SpeciesHelper.registeredSpecies.First(x => x.defName == kvp.Key).label.CapitalizeFirst();
-    //    if (labelList.Contains(label))
-    //    {
-    //        repeatList.AddDistinct(label);
-    //    }
-    //    labelList.Add(label);
-    //}
-    //SpeciesNameList.Clear();
-    //foreach (KeyValuePair<string, SpeciesSettings> kvp in speciesDictCached)
-    //{
-    //    ThingDef def = SpeciesHelper.registeredSpecies.First(x => x.defName == kvp.Key);
-    //    string label = def.label.CapitalizeFirst();
-    //    if (repeatList.Contains(label))
-    //    {
-    //        SpeciesNameList.Add(new string[] { def.defName, label + " (" + def.defName + ")" });
-    //        continue;
-    //    }
-    //    SpeciesNameList.Add(new string[] { def.defName, label });
-    //}
-    //SpeciesNameList.SortBy(x => x[1]);
-
-    //float speciesViewHeight = 0f;
-    //foreach (string[] namePair in SpeciesNameList)
-    //{
-    //    SpeciesWidthList[0] = Mathf.Max(Text.CalcSize(namePair[1]).x, SpeciesWidthList[0]);
-    //    speciesViewHeight += RowHeight;
-    //}
-
-
     SpeciesY = yMin + RowHeight + HighlightPadding;
     SpeciesHeight = WindowHeight - Window.StandardMargin - LowerAreaHeight - SpeciesY;
 
@@ -371,43 +331,6 @@ public static class SettingsWindowUtility
           Find.WindowStack.Add(new FloatMenu(list));
         }
 
-
-        //if (UIAssets.ButtonLabel(buttonRect, KinseyFormulaTitleDict[kinseyFormulaCached]))
-        //{
-        //    List<FloatMenuOption> list = new List<FloatMenuOption>();
-        //    list.Add(new FloatMenuOption(KinseyFormulaTitleDict[KinseyMode.Realistic], delegate
-        //    {
-        //        kinseyFormulaCached = KinseyMode.Realistic;
-        //        SetCacheAndBufferBasedOnKinseyMode();
-        //        // ToDo: Add these as translations
-        //        //Log.Message("Set to Realistic");
-        //    }));
-        //    list.Add(new FloatMenuOption(KinseyFormulaTitleDict[KinseyMode.Uniform], delegate
-        //    {
-        //        kinseyFormulaCached = KinseyMode.Uniform;
-        //        SetCacheAndBufferBasedOnKinseyMode();
-        //        //Log.Message("Set to Uniform");
-        //    }));
-        //    list.Add(new FloatMenuOption(KinseyFormulaTitleDict[KinseyMode.Invisible], delegate
-        //    {
-        //        kinseyFormulaCached = KinseyMode.Invisible;
-        //        SetCacheAndBufferBasedOnKinseyMode();
-        //        //Log.Message("Set to Invisible");
-        //    }));
-        //    list.Add(new FloatMenuOption(KinseyFormulaTitleDict[KinseyMode.Gaypocalypse], delegate
-        //    {
-        //        kinseyFormulaCached = KinseyMode.Gaypocalypse;
-        //        SetCacheAndBufferBasedOnKinseyMode();
-        //        //Log.Message("Set to Gaypocalypse");
-        //    }));
-        //    list.Add(new FloatMenuOption(KinseyFormulaTitleDict[KinseyMode.Custom], delegate
-        //    {
-        //        kinseyFormulaCached = KinseyMode.Custom;
-        //        SetCacheAndBufferBasedOnKinseyMode();
-        //        //Log.Message("Set to Custom");
-        //    }));
-        //    Find.WindowStack.Add(new FloatMenu(list));
-        //}
         buttonRect.xMin -= HighlightPadding;
         buttonRect.xMax += HighlightPadding;
         Widgets.DrawHighlightIfMouseover(buttonRect);
@@ -454,7 +377,6 @@ public static class SettingsWindowUtility
     if (conversationsOpen)
     {
       FloatEntry(nameof(PsychologySettings.conversationDuration), 15f, 180f);
-      //FloatEntry(nameof(PsychologySettings.convoOpinionMultiplier), 0f, 3f);
       FloatEntry(nameof(PsychologySettings.convoMaxOpinionChange), 5f, 200f);
       FloatEntry(nameof(PsychologySettings.convoMeanHours), 0.1f, 10f);
       FloatEntry(nameof(PsychologySettings.convoTimeScaleHours), 0.1f, 10f);
@@ -676,30 +598,6 @@ public static class SettingsWindowUtility
       }
     }
   }
-
-
-  //public static void SetCacheAndBufferBasedOnKinseyMode()
-  //{
-  //    kinseyWeightCustomCached.Clear();
-  //    kinseyWeightCustomBuffer.Clear();
-  //    if (kinseyFormulaCached != KinseyMode.Custom)
-  //    {
-  //        foreach (float w in PsycheHelper.KinseyModeWeightDict[kinseyFormulaCached])
-  //        {
-  //            float rounded = (float)Math.Round(w, 1);
-  //            kinseyWeightCustomCached.Add(rounded);
-  //            kinseyWeightCustomBuffer.Add(rounded.ToString());
-  //        }
-  //    }
-  //    else
-  //    {
-  //        foreach (float w in PsychologySettings.kinseyWeightCustom)
-  //        {
-  //            kinseyWeightCustomCached.Add(w);
-  //            kinseyWeightCustomBuffer.Add(w.ToString());
-  //        }
-  //    }
-  //}
 
 
   public static void CheckboxEntry(string boolSettingName)
@@ -928,96 +826,7 @@ public static class SettingsWindowUtility
         speciesMinLovinEntry[defName] = new EntryFloat(settings.minLovinAge, alwaysOpen: true);
       }
       speciesMinLovinEntry[defName].UpdateValueAndBuffer(settings.minLovinAge);
-      //speciesBuffer[defName] = new List<string> { settings.minDatingAge.ToString(), settings.minLovinAge.ToString() };
     }
   }
-
-
-  //public static void SetAllCachedToSettings()
-  //{
-
-  //    foreach (string boolSettingName in PsychologySettings.BoolSettingNameList)
-  //    {
-  //        if (PsychologySettings.GetSettingFromName(boolSettingName) is bool boolValue)
-  //        {
-  //            BoolCachedDict[boolSettingName] = boolValue;
-  //            //Log.Message("Set cache of " + boolSettingName + " to a value of " + boolValue);
-  //        }
-  //        else
-  //        {
-  //            Log.Warning("SetAllCachedToSettings, " + boolSettingName + " not a valid bool setting name");
-  //        }
-  //    }
-
-  //    foreach (string floatSettingName in PsychologySettings.FloatSettingNameList)
-  //    {
-  //        if (PsychologySettings.GetSettingFromName(floatSettingName) is float floatValue)
-  //        {
-  //            if (FloatEntryDict.ContainsKey(floatSettingName))
-  //            {
-  //                FloatEntryDict[floatSettingName].UpdateValueAndBuffer(floatValue);
-  //            }
-  //            else
-  //            {
-  //                FloatEntryDict[floatSettingName] = new EntryFloat(floatValue, null, true, true, -1);
-  //            }
-  //            //FloatCachedDict[floatSettingName] = floatValue;
-  //            //FloatBufferDict[floatSettingName] = floatValue.ToString();
-  //            //Log.Message("Set cache of " + floatSettingName + " to a value of " + floatValue);
-  //        }
-  //        else
-  //        {
-  //            Log.Warning("SetAllCachedToSettings, " + floatSettingName + " not a valid bool setting name");
-  //        }
-  //    }
-
-  //    kinseyFormulaCached = PsychologySettings.kinseyFormula;
-  //    SetCacheAndBufferBasedOnKinseyMode();
-
-  //    //speciesDictCached.Clear();
-  //    //speciesMinDatingEntry.Clear();
-  //    //speciesMinLovinEntry.Clear();
-  //    //speciesBuffer.Clear();
-  //    foreach (ThingDef def in SpeciesHelper.registeredSpecies)
-  //    {
-  //        string defName = def.defName;
-  //        SpeciesSettings settings = SpeciesHelper.GetOrMakeSpeciesSettingsFromThingDef(def);
-  //        speciesDictCached[defName] = new SpeciesSettings(settings);
-
-  //        if (!speciesMinDatingEntry.ContainsKey(defName))
-  //        {
-  //            speciesMinDatingEntry[defName] = new EntryFloat(settings.minDatingAge, null, true, true, -1);
-  //        }
-  //        speciesMinDatingEntry[defName].UpdateValueAndBuffer(settings.minDatingAge);
-
-  //        if (!speciesMinLovinEntry.ContainsKey(defName))
-  //        {
-  //            speciesMinLovinEntry[defName] = new EntryFloat(settings.minLovinAge, null, true, true, -1);
-  //        }
-  //        speciesMinLovinEntry[defName].UpdateValueAndBuffer(settings.minLovinAge);
-  //        //speciesBuffer[defName] = new List<string> { settings.minDatingAge.ToString(), settings.minLovinAge.ToString() };
-  //    }
-  //}
-
-  //public static void SaveAllSettings()
-  //{
-  //    foreach (string boolSettingName in PsychologySettings.BoolSettingNameList)
-  //    {
-  //        PsychologySettings.SetSettingFromName(boolSettingName, BoolCachedDict[boolSettingName]);
-  //    }
-  //    foreach (string floatSettingName in PsychologySettings.FloatSettingNameList)
-  //    {
-  //        PsychologySettings.SetSettingFromName(floatSettingName, FloatEntryDict[floatSettingName].valFloat);
-  //    }
-  //    PsychologySettings.kinseyFormula = kinseyFormulaCached;
-  //    if (PsychologySettings.kinseyFormula == KinseyMode.Custom)
-  //    {
-  //        PsychologySettings.kinseyWeightCustom = kinseyWeightCustomCached.ListFullCopy();
-  //    }
-  //    foreach (KeyValuePair<string, SpeciesSettings> kvp in speciesDictCached)
-  //    {
-  //        PsychologySettings.speciesDict[kvp.Key] = new SpeciesSettings(kvp.Value);
-  //    }
-  //}
 
 }

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Runtime;
 using System.Collections.Generic;
-using System.Reflection.Emit;
-using System.Security.Cryptography.X509Certificates;
 using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.Noise;
 using HarmonyLib;
 using System.Reflection;
 
@@ -18,7 +14,6 @@ public abstract class EntryObject<T, T2>
   public int ticker = 0;
   private static int instanceCounter;
   internal string buffer = "";
-  internal bool activeFlag = false;
   public static readonly List<KeyCode> keyCodesToUnfocus = new List<KeyCode> { KeyCode.Escape, KeyCode.KeypadEnter, KeyCode.Return };
   internal bool pressedClosedKey = false;
   internal bool alwaysOpen;
@@ -135,33 +130,16 @@ public abstract class EntryObject<T, T2>
     {
       result = true;
       ticker--;
-      //if (!activeFlag)
-      //{
-      //  activeFlag = true;
-      //  SetBufferToValue();
-      //}
     }
     else
     {
       result = alwaysOpen;
-      //if (activeFlag)
-      //{
-      //  activeFlag = false;
-      //  SetBufferToValue();
-      //  //TryParseBuffer(true, min, max);
-      //}
-      //SetBufferToValue();
     }
     return result;
   }
 
   internal void EntryObjectTextField(Rect rectTextField, T min = default(T), T max = default(T))
   {
-    //if (!openFlag)
-    //{
-    //  openFlag = true;
-    //  SetBufferToValue();
-    //}
     GUI.SetNextControlName(controlName);
     buffer = Widgets.TextField(rectTextField, buffer);
     TryParseBuffer(true, min, max);

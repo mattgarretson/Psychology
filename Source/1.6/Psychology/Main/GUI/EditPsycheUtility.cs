@@ -276,29 +276,6 @@ public static class EditPsycheUtility
     Rect resetRect = new Rect(blankWidth, mainRect.yMax - ButtonHeight, ButtonWidth, ButtonHeight);
     Rect randomRect = new Rect(resetRect.xMax + blankWidth, resetRect.y, ButtonWidth, ButtonHeight);
 
-    //for (int i = 0; i < CachedList.Count; i++)
-    //{
-    //    PersonalityNode node = Nodes[CachedList[i].First];
-    //    if (node.rawRating != CachedList[i].Second)
-    //    {
-    //        PsycheCardUtility.Ticker = -1;
-    //    }
-    //    node.rawRating = CachedList[i].Second;
-    //}
-    //if (PsychologySettings.enableKinsey)
-    //{
-    //    bool bool1 = PsycheHelper.Comp(pawn).Sexuality.kinseyRating != pawnKinseyRating;
-    //    bool bool2 = PsycheHelper.Comp(pawn).Sexuality.sexDrive != pawnSexDrive;
-    //    bool bool3 = PsycheHelper.Comp(pawn).Sexuality.romanticDrive != pawnRomanticDrive;
-    //    if (bool1 || bool2 || bool3)
-    //    {
-    //        PsycheHelper.Comp(pawn).Sexuality.kinseyRating = pawnKinseyRating;
-    //        PsycheHelper.Comp(pawn).Sexuality.sexDrive = pawnSexDrive;
-    //        PsycheHelper.Comp(pawn).Sexuality.romanticDrive = pawnRomanticDrive;
-    //        PsycheCardUtility.Ticker = -1;
-    //    }
-    //}
-
     if (Widgets.ButtonText(resetRect, ResetButtonText, true, true, true))
     {
       pt.RandomizeRatings();
@@ -319,20 +296,6 @@ public static class EditPsycheUtility
       {
         st.GenerateSexuality(Mathf.CeilToInt(1e+7f * Rand.Value));
       }
-      //for (int i = 0; i < CachedList.Count; i++)
-      //{
-      //    string nodeLabel = CachedList[i].First;
-      //    PersonalityNode node = Nodes[nodeLabel];
-      //    CachedList[i] = new Pair<string, float>(nodeLabel, node.rawRating);
-      //}
-      //if (PsychologySettings.enableKinsey)
-      //{
-      //    PsycheHelper.Comp(pawn).Sexuality.GenerateSexuality(Mathf.CeilToInt(1e+7f * Rand.Value));
-      //    pawnKinseyRating = PsycheHelper.Comp(pawn).Sexuality.kinseyRating;
-      //    pawnSexDrive = PsycheHelper.Comp(pawn).Sexuality.sexDrive;
-      //    pawnRomanticDrive = PsycheHelper.Comp(pawn).Sexuality.romanticDrive;
-      //}
-      //PsycheCardUtility.Ticker = -1;
     }
     PsycheCardUtility.Ticker = -1;
     GUI.EndGroup();
