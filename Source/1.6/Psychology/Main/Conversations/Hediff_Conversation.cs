@@ -41,21 +41,6 @@ public class Hediff_Conversation : HediffWithComps
   public override void Tick()
   {
     base.Tick();
-    //if (this.otherPawn == null)
-    //{
-    //    this.pawn.health.RemoveHediff(this);
-    //    return;
-    //}
-    //if (!this.otherPawn.Spawned || !this.pawn.Spawned || !SocialInteractionUtility.CanReceiveInteraction(this.pawn) || !SocialInteractionUtility.CanReceiveInteraction(this.otherPawn))
-    //{
-    //    this.pawn.health.RemoveHediff(this);
-    //    return;
-    //}
-    //if (this.otherPawn.Dead || this.otherPawn.Downed || this.otherPawn.InAggroMentalState)
-    //{
-    //    this.pawn.health.RemoveHediff(this);
-    //    return;
-    //}
     if (this.pawn.IsHashIntervalTick(200))
     {
       if (this.otherPawn == null)
@@ -316,8 +301,6 @@ public class Hediff_Conversation : HediffWithComps
 
     // Added time minimum to baseline to opinionMod because conversations often end very quickly
     float y = yr * r + y0x * Func(x) + y0t * Func(t) + y1 * Func(x) * Func(t) + y2 * Func(x * (1f + t));
-    //y *= PsychologySettings.convoOpinionMultiplier;
-    //y = Mathf.Min(y, PsychologySettings.convoMaxOpinionChange);
     y *= PsychologySettings.convoMaxOpinionChange / (yr + y0x + y0t + y1 + y2);
 
     // In low-population colonies, pawns will put aside their differences.

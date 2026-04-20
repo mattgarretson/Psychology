@@ -25,17 +25,6 @@ public class InteractionWorker_Conversation : InteractionWorker
             //Log.Message("InteractionWorker_Conversation.RandomSelectionWeight, initiator " + initiator.LabelShort + ", recipient " + recipient.LabelShort + ", not talking");
             return 0f;
         }
-        //float baseChance = 0.45f;
-        //Lord lord = LordUtility.GetLord(initiator);
-        //if (lord != null && (lord.LordJob is LordJob_HangOut || lord.LordJob is LordJob_Date) && LordUtility.GetLord(recipient) == lord)
-        //{
-        //    baseChance = 0.75f;
-        //}
-        //if (initiator.story.traits.HasTrait(TraitDefOfPsychology.Chatty))
-        //{
-        //    baseChance *= 1.2f;
-        //}
-        //return Mathf.Max(0f, baseChance + (PsycheHelper.Comp(recipient).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Friendly)-0.6f) + (PsycheHelper.Comp(initiator).Psyche.GetPersonalityRating(PersonalityNodeDefOf.Extroverted)-0.5f));
         float chanceFactor = 0.0f;
         Lord lord = LordUtility.GetLord(initiator);
         if (lord != null && (lord.LordJob is LordJob_HangOut || lord.LordJob is LordJob_Date) && LordUtility.GetLord(recipient) == lord)
