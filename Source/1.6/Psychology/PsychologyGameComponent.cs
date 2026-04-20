@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Reflection;
 using RimWorld;
 using RimWorld.Planet;
 using Verse;
 using Verse.AI.Group;
-using Verse.Grammar;
 using UnityEngine;
 
 namespace Psychology;
@@ -56,17 +51,7 @@ public class PsychologyGameComponent : GameComponent
     {
       visitMayorChanceFactor = 0f;
     }
-    //FirstTimeLoadingNewPsychology();
   }
-
-  //public override void StartedNewGame()
-  //{
-  //    //Log.Message("Psychology: started new game");
-  //    this.firstTimeWithUpdate = false;
-  //    InitializeRegisteredSpecies();
-  //    BuildMayorDictionary();
-  //    ImplementSexualOrientation();
-  //}
 
   public override void GameComponentTick()
   {
@@ -93,33 +78,6 @@ public class PsychologyGameComponent : GameComponent
     }
     return certaintyChange;
   }
-
-  //public virtual void FirstTimeLoadingNewPsychology()
-  //{
-  //    if (!this.firstTimeWithUpdate)
-  //    {
-  //        return;
-  //    }
-  //    Find.WindowStack.Add(new Dialog_UpdateIntro());
-  //    this.firstTimeWithUpdate = false;
-  //}
-
-  //public virtual void InitializeCachedIdeoCertaintyChange()
-  //{
-  //    foreach (Pawn pawn in Find.WorldPawns.AllPawnsAlive)
-  //    {
-  //        AddPawnToCachedIdeoCertaityChange(pawn);
-  //    }
-  //}
-
-  //public virtual void AddPawnToCachedIdeoCertaityChange(Pawn pawn)
-  //{
-  //    if (PsycheHelper.PsychologyEnabled(pawn))
-  //    {
-  //        float ideoCertaintyChange = PsycheHelper.Comp(pawn).Psyche.CalculateCertaintyChangePerDay();
-  //        CachedCertaintyChangePerDayDict.AddDistinct(pawn.thingIDNumber, ideoCertaintyChange);
-  //    }
-  //}
 
   public virtual void BuildMayorDictionary()
   {
@@ -217,22 +175,6 @@ public class PsychologyGameComponent : GameComponent
   }
 
 
-
-  //public virtual void RandomizeRatingsForAllPawns()
-  //{
-  //    foreach (Pawn pawn in PawnsFinder.All_AliveOrDead)
-  //    {
-  //        if (PsycheHelper.TryGetPawnSeed(pawn) != true)
-  //        {
-  //            continue;
-  //        }
-  //        if (PsycheHelper.PsychologyEnabled(pawn) != true)
-  //        {
-  //            continue;
-  //        }
-  //        PsycheHelper.Comp(pawn).Psyche.RandomizeRatings();
-  //    }
-  //}
 
   public virtual void ConstituentTick()
   {
