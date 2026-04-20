@@ -104,23 +104,7 @@ public class TraitSet_ManualPatches
 
     public static void HasTrait_KinseyEnabledPostfix(TraitDef tDef, Pawn ___pawn, ref bool __result)
     {
-        //int num = 0;
-        if (tDef == TraitDefOf.Asexual)
-        {
-            //Log.Warning("HasTrait_KinseyEnabledPostfix was used for TraitDefOf.Asexual");
-            //num = 1;
-        }
-        else if (tDef == TraitDefOf.Bisexual)
-        {
-            //Log.Warning("HasTrait_KinseyEnabledPostfix was used for TraitDefOf.Bisexual");
-            //num = 2;
-        }
-        else if (tDef == TraitDefOf.Gay)
-        {
-            //Log.Warning("HasTrait_KinseyEnabledPostfix was used for TraitDefOf.Gay");
-            //num = 3;
-        }
-        else
+        if (tDef != TraitDefOf.Asexual && tDef != TraitDefOf.Bisexual && tDef != TraitDefOf.Gay)
         {
             return;
         }
@@ -128,34 +112,6 @@ public class TraitSet_ManualPatches
         {
             Log.Error("HasTrait_KinseyEnabledPostfix, pawn " + ___pawn + " has trait " + tDef);
         }
-        //if (PsycheHelper.TryGetPawnSeed(___pawn) != true)
-        //{
-        //    Log.Warning("HasTrait_KinseyEnabledPostfix, TryGetPawnSeed != true");
-        //    return;
-        //}
-        //if (PsycheHelper.PsychologyEnabled(___pawn) != true)
-        //{
-        //    Log.Warning("HasTrait_KinseyEnabledPostfix, PsychologyEnabled != true for pawn = " + ___pawn);
-        //    return;
-        //}
-        //switch (num)
-        //{
-        //    case 1:
-        //        Log.Warning("HasTrait_KinseyEnabledPostfix, returned sexDrive < 0.1f for pawn = " + ___pawn);
-        //        __result = PsycheHelper.Comp(___pawn).Sexuality.sexDrive < 0.1f;
-        //        return;
-        //    case 2:
-        //        Log.Warning("HasTrait_KinseyEnabledPostfix, returned kinsey != 0,6 for pawn = " + ___pawn);
-        //        __result = PsycheHelper.Comp(___pawn).Sexuality.kinseyRating != 0 && PsycheHelper.Comp(___pawn).Sexuality.kinseyRating != 6;
-        //        return;
-        //    case 3:
-        //        Log.Warning("HasTrait_KinseyEnabledPostfix, returned kinsey != 0 for pawn = " + ___pawn);
-        //        __result = PsycheHelper.Comp(___pawn).Sexuality.kinseyRating != 0;
-        //        return;
-        //    default:
-        //        Log.Error("HasTrait_KinseyEnabledPostfix, impossible condition reached");
-        //        return;
-        //}
     }
 
     public static void HasTrait_KinseyEnabledPostfix2(TraitDef tDef, int degree, Pawn ___pawn, ref bool __result)

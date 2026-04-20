@@ -120,30 +120,6 @@ public static class ChildRelationUtility_ManualPatches
         //Log.Message("ChanceOfBecomingChildOf, KinseyEnabledMultiplier successfully fired");
         return Mathf.InverseLerp(6f, 0f, PsycheHelper.Comp(parent).Sexuality.kinseyRating);
     }
-
-    //[HarmonyPostfix]
-    //public static void ChanceOfBecomingChildOf(ref float __result, Pawn father, Pawn mother, Pawn child)
-    //{
-    //    if (!PsychologySettings.enableKinsey)
-    //    {
-    //        return;
-    //    }
-    //    /* Kinsey-enabled pawns shouldn't have the Gay trait, so we can just apply the sexuality modifier here. */
-    //    if (father != null && child != null && child.GetFather() == null && PsycheHelper.TryGetPawnSeed(father))
-    //    {
-    //        if (PsycheHelper.PsychologyEnabled(father))
-    //        {
-    //            __result *= Mathf.InverseLerp(6f, 0f, PsycheHelper.Comp(father).Sexuality.kinseyRating);
-    //        }
-    //    }
-    //    if (mother != null && child != null && child.GetMother() == null && PsycheHelper.TryGetPawnSeed(mother))
-    //    {
-    //        if (PsycheHelper.PsychologyEnabled(mother))
-    //        {
-    //            __result *= Mathf.InverseLerp(6f, 0f, PsycheHelper.Comp(mother).Sexuality.kinseyRating);
-    //        }
-    //    }
-    //}
 }
 
 [HarmonyPatch(typeof(ChildRelationUtility), "GetParentAgeFactor")]
